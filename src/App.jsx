@@ -1,23 +1,26 @@
+import { useState, useEffect } from 'react'
 import Header from "./components/Header"
 import Guitarra from "./components/Guitarra"
+import { db } from './data/db.js'
 
 function App() {
-
+    const [data, setData] = useState(db);
+    
   return (
     <>
     <Header />
 
       <main class="container-xl mt-5">
           <h2 class="text-center">Nuestra Colección</h2>
-          
+
           <div class="row mt-5">
-            <Guitarra />
-            <Guitarra />
-            <Guitarra />
-            <Guitarra />
-            <Guitarra />
-            <Guitarra />
-            <Guitarra />
+            {data.map((guitarra) => (
+                <Guitarra 
+                    key={guitarra.id}
+                    guitarra ={guitarra}
+                />
+            ))}
+            
           </div>
       </main>
 
