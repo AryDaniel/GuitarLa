@@ -3,6 +3,8 @@ import Header from "./components/Header"
 import Guitarra from "./components/Guitarra"
 import { db } from './data/db.js'
 
+// npm run build
+
 function App() {
 
     const initialCart = () => {
@@ -10,7 +12,7 @@ function App() {
 
         return localStorageCart ? JSON.parse(localStorageCart) : []
     }
-    const [data, setData] = useState(db);
+    const [data] = useState(db);
     const [cart, setCart] = useState(initialCart)
 
     const MAX_ITEMS = 5;
@@ -77,10 +79,10 @@ function App() {
         clearCart={clearCart}
     />
 
-      <main class="container-xl mt-5">
-          <h2 class="text-center">Nuestra Colección</h2>
+      <main className="container-xl mt-5">
+          <h2 className="text-center">Nuestra Colección</h2>
 
-          <div class="row mt-5">
+          <div className="row mt-5">
             {data.map((guitarra) => (
                 <Guitarra 
                     key={guitarra.id}
@@ -93,9 +95,9 @@ function App() {
       </main>
 
 
-      <footer class="bg-dark mt-5 py-5">
-          <div class="container-xl">
-              <p class="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
+      <footer className="bg-dark mt-5 py-5">
+          <div className="container-xl">
+              <p className="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
           </div>
       </footer>
     </>
