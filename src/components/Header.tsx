@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import type { Guitar, CartItem} from '../types'
 
 type HeaderProps = {
@@ -5,10 +6,7 @@ type HeaderProps = {
     removeFromCart: (id: Guitar["id"]) => void
     decreaseQuantity: (id: Guitar["id"]) => void
     increaseQuantity: (id: Guitar["id"]) => void
-    clearCart: () => void
-    isEmpty: boolean
-    cartTotal: number
-    
+    clearCart: () => void    
 }
 
 export default function Header(
@@ -17,10 +15,12 @@ export default function Header(
         removeFromCart,
         decreaseQuantity,
         increaseQuantity,
-        clearCart,
-        isEmpty,
-        cartTotal
+        clearCart
     } : HeaderProps) {
+
+    // State Derivado
+    const isEmpty = useMemo( () => cart.length === 0, [cart])
+    const cartTotal = useMemo( () => cart.reduce( (total, item ) => total + (item.quantity * item.price), 0), [cart] )
 
     return (
         <header className="py-5 header">
