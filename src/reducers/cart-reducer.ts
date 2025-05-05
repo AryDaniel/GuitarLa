@@ -23,11 +23,38 @@ export const cartReducer = (
         state: CartState = initialState,
         action: CartActions
     ) => {
+    const MAX_ITEMS = 5
     
     if(action.type === 'add-to-cart') {
+        const itemExists = state.cart.find(guitar => guitar.id === action.payload.item.id)
+        let updatedCart: CartItem[] = []
+
+        if(itemExists) {
+            updatedCart = state.cart.map(item => {
+                if(item.id === action.payload.item.id) {
+                    if(item.quantity < MAX_ITEMS) {
+                        return {
+                            ...item,
+                            quantity: item.quantity + 1
+                        }
+                    } else {
+                        // Is the element, but the quantity is already at max
+                        return item
+                    }
+                } else {
+                    // Is not the element, return it as is
+                    return item
+                }                
+            })
+        } else {
+            const newItem : CartItem = {...action.payload.item, quantity : 1}
+            updatedCart = [...state.cart, newItem]
+        }
 
         return {
             ...state,
+            cart: updatedCart
+            
         }
     }
 
