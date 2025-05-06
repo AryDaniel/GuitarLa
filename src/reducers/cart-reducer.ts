@@ -107,7 +107,7 @@ export const cartReducer = (
 
         return {
             ...state,
-            
+            cart: []
         }
     }
 

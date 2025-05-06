@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { CartItem } from '../types'
 
 export const useCart = () => {
@@ -8,20 +8,12 @@ export const useCart = () => {
     return localStorageCart ? JSON.parse(localStorageCart) : []
   }
 
-  const [cart, setCart] = useState(initialCart)
+  const [cart] = useState(initialCart)
 
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }, [cart])
-
-  function clearCart() {
-    setCart([])
-  }
 
   return {
-    cart,
-    clearCart
+    cart
   }
 }
 

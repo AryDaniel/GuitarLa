@@ -1,15 +1,11 @@
 import Header from "./components/Header"
 import Guitarra from "./components/Guitarra"
-import { useCart } from './hooks/useCart'
 import { useReducer } from "react"
 import { cartReducer, initialState } from "./reducers/cart-reducer"
 
 // npm run build
 
 function App() {
-    const {
-      clearCart
-    } = useCart()
 
     const [state, dispatch] = useReducer(cartReducer, initialState)
     
@@ -17,8 +13,7 @@ function App() {
     <>
     <Header 
         cart={state.cart}
-        dispatch={dispatch}        
-        clearCart={clearCart}
+        dispatch={dispatch}
     />
 
       <main className="container-xl mt-5">
